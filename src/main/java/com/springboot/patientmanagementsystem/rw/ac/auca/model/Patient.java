@@ -1,9 +1,12 @@
 package com.springboot.patientmanagementsystem.rw.ac.auca.model;
 
-import javax.annotation.ManagedBean;
+import javax.persistence.*;
 
-@ManagedBean
+@Entity
+@Table(name = "patients")
 public class Patient extends Person {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String patientId;
     private String observation;
