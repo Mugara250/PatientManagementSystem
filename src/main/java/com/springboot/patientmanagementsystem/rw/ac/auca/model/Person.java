@@ -6,7 +6,7 @@ public class Person {
     private String lastName;
     private String gender;
 
-    public Person(int age, String firstName, String lastName, String gender) {
+    public Person() {
         this.age = age;
         this.firstName = firstName;
         this.lastName = lastName;

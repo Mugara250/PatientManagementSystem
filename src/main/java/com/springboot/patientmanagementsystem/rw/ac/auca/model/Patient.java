@@ -3,12 +3,14 @@ package com.springboot.patientmanagementsystem.rw.ac.auca.model;
 import javax.annotation.ManagedBean;
 
 @ManagedBean
-public class Patient {
+public class Patient extends Person {
     private Long id;
     private String patientId;
     private String observation;
 
+    public Patient(){}
     public Patient(Long id, String patientId, String observation) {
+        super();
         this.id = id;
         this.patientId = patientId;
         this.observation = observation;
