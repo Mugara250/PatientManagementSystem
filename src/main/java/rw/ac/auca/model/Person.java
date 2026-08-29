@@ -1,4 +1,4 @@
-package com.springboot.patientmanagementsystem.rw.ac.auca.model;
+package rw.ac.auca.model;
 
 public class Person {
     private int age;
