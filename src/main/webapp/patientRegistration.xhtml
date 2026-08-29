@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <title>Patient Registration</title>
+    <style type="">
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f4f6f8;
+            padding: 40px;
+        }
+        .page-wrapper {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: #1a3c5e;
+            margin-bottom: 25px;
+        }
+        .form-card {
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            padding: 35px 40px;
+        }
+        .form-row {
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+        .form-row label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #555;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+        }
+        .form-row input,
+        .form-row textarea {
+            padding: 12px 14px;
+            border: 1px solid #dde3e8;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: inherit;
+            color: #333;
+            outline: none;
+            transition: border-color 0.2s ease;
+        }
+        .form-row input:focus,
+        .form-row textarea:focus {
+            border-color: #00b09b;
+        }
+        .error-msg {
+            color: #c62828;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+        .btn-row {
+            display: flex;
+            gap: 12px;
+            margin-top: 10px;
+        }
+        .btn-submit {
+            flex: 1;
+            padding: 13px 20px;
+            background: #00b09b;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+        .btn-submit:hover {
+            background: #009688;
+        }
+        .btn-cancel {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 13px 20px;
+            background: #f1f1f1;
+            color: #555;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background 0.2s ease;
+        }
+        .btn-cancel:hover {
+            background: #e0e0e0;
+        }
+    </style>
+</h:head>
+<h:body>
+    <div class="page-wrapper">
+        <h1>Patient Information</h1>
+
+        <div class="form-card">
+            <h:form>
+                <div class="form-row">
+                    <h:outputLabel for="PatientId" value="Patient ID"/>
+                    <h:inputText
+                            value="#{patientBean.patient.patientId}"
+                            required="true"
+                            id="PatientId"
+                            label="Patient ID">
+                        <f:validateLength minimum="5" maximum="5"/>
+                    </h:inputText>
+                    <h:message styleClass="error-msg" for="PatientId"/>
+                </div>
+
+                <div class="form-row">
+                    <h:outputLabel for="FirstName" value="First Name"/>
+                    <h:inputText
+                            value="#{patientBean.patient.firstName}"
+                            required="true"
+                            id="FirstName"
+                            label="First Name">
+                        <f:validateLength minimum="2" maximum="30"/>
+                    </h:inputText>
+                    <h:message styleClass="error-msg" for="FirstName"/>
+                </div>
+
+                <div class="form-row">
+                    <h:outputLabel for="LastName" value="Last Name"/>
+                    <h:inputText
+                            value="#{patientBean.patient.lastName}"
+                            required="true"
+                            id="LastName"
+                            label="Last Name">
+                        <f:validateLength minimum="3" maximum="30"/>
+                    </h:inputText>
+                    <h:message styleClass="error-msg" for="LastName"/>
+                </div>
+
+                <div class="form-row">
+                    <h:outputLabel for="age" value="Age"/>
+                    <h:inputText
+                            value="#{patientBean.patient.age}"
+                            required="true"
+                            id="age"
+                            label="Age">
+                        <f:validateLongRange minimum="0" maximum="150"/>
+                    </h:inputText>
+                    <h:message styleClass="error-msg" for="age"/>
+                </div>
+
+                <div class="form-row">
+                    <h:outputLabel for="gender" value="Gender"/>
+                    <h:inputText
+                            value="#{patientBean.patient.gender}"
+                            required="true"
+                            id="gender"
+                            label="Gender">
+                        <f:validateLength minimum="3" maximum="30"/>
+                    </h:inputText>
+                    <h:message styleClass="error-msg" for="gender"/>
+                </div>
+
+                <div class="form-row">
+                    <h:outputLabel for="observation" value="Observation"/>
+                    <h:inputTextarea
+                            value="#{patientBean.patient.observation}"
+                            required="true"
+                            id="observation"
+                            label="Observation"
+                            rows="4">
+                        <f:validateLength minimum="10" maximum="255"/>
+                    </h:inputTextarea>
+                    <h:message styleClass="error-msg" for="observation"/>
+                </div>
+
+                <div class="btn-row">
+                    <h:commandButton styleClass="btn-submit"
+                                     value="Save Patient"
+                                     action="#{patientBean.save}"/>
+                    <h:commandLink styleClass="btn-cancel"
+                                   value="Cancel"
+                                   action="patientList?faces-redirect=true"/>
+                </div>
+            </h:form>
+        </div>
+    </div>
+</h:body>
+</html>
