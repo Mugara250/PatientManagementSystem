@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+    <title>Patients List</title>
+</h:head>
+
+<h:body>
+    <h:dataTable value="#{patientBean.patients}" var="p">
+        <h:column>#{p.firstName} #{p.lastName}</h:column>
+        <h:column>#{p.email}</h:column>
+        <h:column>
+            <h:commandLink value="Edit" action="#{patientBean.prepareEdit(p)}" />
+            <h:commandLink value="Delete" action="#{patientBean.delete(p)}" />
+        </h:column>
+    </h:dataTable>
+    <h:commandLink value="Add New Patient" outcome="patientForm" />
+</h:body>
+
+</html>
