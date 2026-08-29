@@ -1,5 +1,3 @@
-package com.springboot.patientmanagementsystem;
-
 import java.io.*;
 
 import jakarta.servlet.http.*;
