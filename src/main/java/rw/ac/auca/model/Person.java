@@ -1,12 +1,28 @@
 package rw.ac.auca.model;
 
+import javax.persistence.Column;
+import javax.persistence.MappedSuperclass;
+
+@MappedSuperclass
 public class Person {
-    private int age;
+
+    @Column(nullable = false, length = 30)
     private String firstName;
+
+    @Column(nullable = false, length = 30)
     private String lastName;
+
+    @Column(nullable = false, length = 30)
     private String gender;
 
+    @Column(nullable = false)
+    private int age;
+
+    // ADD a no-arg constructor — JPA requires one on every entity/mapped superclass
     public Person() {
+    }
+
+    public Person(int age, String firstName, String lastName, String gender) {
         this.age = age;
         this.firstName = firstName;
         this.lastName = lastName;

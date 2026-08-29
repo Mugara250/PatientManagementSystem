@@ -97,6 +97,20 @@
         .btn-cancel:hover {
             background: #e0e0e0;
         }
+        .global-error {
+            display: block;
+            margin-bottom: 20px;
+        }
+        .global-error tr td {
+            background: #ffebee;
+            color: #c62828;
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 500;
+            display: block;
+            margin-bottom: 8px;
+        }
     </style>
 </h:head>
 <h:body>
@@ -105,14 +119,17 @@
 
         <div class="form-card">
             <h:form>
+                <h:messages globalOnly="true" styleClass="error-msg" />
                 <div class="form-row">
                     <h:outputLabel for="PatientId" value="Patient ID"/>
                     <h:inputText
                             value="#{patientBean.patient.patientId}"
                             required="true"
                             id="PatientId"
-                            label="Patient ID">
-                        <f:validateLength minimum="5" maximum="5"/>
+                            label="Patient ID"
+                            validatorMessage="Patient ID must follow the format PAT-001 (e.g. PAT-042)">
+                        <f:validateLength minimum="5" maximum="10"/>
+                        <f:validateRegex pattern="^PAT-\d{3}$"/>
                     </h:inputText>
                     <h:message styleClass="error-msg" for="PatientId"/>
                 </div>
