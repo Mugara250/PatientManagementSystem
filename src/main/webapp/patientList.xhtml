@@ -2,24 +2,154 @@
 <!DOCTYPE html
         PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html">
-
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:head>
     <title>Patients List</title>
+    <style type="">
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f4f6f8;
+            padding: 40px;
+        }
+        .page-wrapper {
+            max-width: 950px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: #1a3c5e;
+            margin-bottom: 25px;
+        }
+        .table-card {
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        thead th {
+            background: #1a3c5e;
+            color: white;
+            text-align: left;
+            padding: 14px 18px;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        tbody td {
+            padding: 14px 18px;
+            border-bottom: 1px solid #eee;
+            font-size: 14px;
+            color: #333;
+        }
+        tbody tr:hover {
+            background: #f9fbfd;
+        }
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+        .action-link {
+            margin-right: 12px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            padding: 6px 12px;
+            border-radius: 6px;
+        }
+        .edit-link {
+            color: #00796b;
+            background: #e0f2f1;
+        }
+        .edit-link:hover {
+            background: #b2dfdb;
+        }
+        .delete-link {
+            color: #c62828;
+            background: #ffebee;
+        }
+        .delete-link:hover {
+            background: #ffcdd2;
+        }
+        .add-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 22px;
+            background: #00b09b;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .add-btn:hover {
+            background: #009688;
+        }
+        .empty-state {
+            padding: 40px;
+            text-align: center;
+            color: #999;
+        }
+    </style>
 </h:head>
-
 <h:body>
-    <h:dataTable value="#{patientBean.patients}" var="p">
-        <h:column>#{p.firstName} #{p.lastName}</h:column>
-        <h:column>#{p.email}</h:column>
-        <h:column>
-            <h:commandLink value="Edit" action="#{patientBean.prepareEdit(p)}" />
-            <h:commandLink value="Delete" action="#{patientBean.delete(p)}" />
-        </h:column>
-    </h:dataTable>
-    <h:commandLink value="Add New Patient" outcome="patientForm" />
-</h:body>
+    <div class="page-wrapper">
+        <h1>Patient Records</h1>
 
+        <h:form>
+            <h:panelGroup rendered="#{not empty patientBean.patients}">
+                <div class="table-card">
+                    <h:dataTable value="#{patientBean.patients}" var="p"
+                                 style="width:100%"
+                                 headerClass="table-header">
+                        <h:column>
+                            <f:facet name="header">Patient ID</f:facet>
+                            #{p.patientId}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Name</f:facet>
+                            #{p.firstName} #{p.lastName}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Age</f:facet>
+                            #{p.age}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Gender</f:facet>
+                            #{p.gender}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Observation</f:facet>
+                            #{p.observation}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Actions</f:facet>
+                            <h:commandLink styleClass="action-link edit-link"
+                                           value="Edit"
+                                           action="#{patientBean.prepareEdit(p)}" />
+                            <h:commandLink styleClass="action-link delete-link"
+                                           value="Delete"
+                                           action="#{patientBean.delete(p)}" />
+                        </h:column>
+                    </h:dataTable>
+                </div>
+            </h:panelGroup>
+
+            <h:panelGroup rendered="#{empty patientBean.patients}">
+                <div class="table-card empty-state">
+                    <p>No patients registered yet.</p>
+                    <p style="font-size:13px; color:#bbb;">Click "Add New Patient" below to get started.</p>
+                </div>
+            </h:panelGroup>
+
+            <h:commandLink styleClass="add-btn"
+                           value="+ Add New Patient"
+                           action="patientRegistration?faces-redirect=true" />
+        </h:form>
+    </div>
+</h:body>
 </html>
